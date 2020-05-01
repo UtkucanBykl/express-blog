@@ -1,17 +1,24 @@
 const mongoose = require('mongoose');
-const { categorySchema } = require('./category')
 
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
     title: String,
     content: String,
-    date: Date,
+    date: {
+        type: Date,
+        default: Date.now
+    },
     publish: {
         type: Boolean,
         default: false
     },
-    category: [categorySchema],
+    categoryID: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category'
+        }
+    ],
 })
 
 module.exports = {

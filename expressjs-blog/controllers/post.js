@@ -1,10 +1,9 @@
 const {Post} = require('../models/post')
 
 const getPostController = (req, res) => {
-    Post.find({publish: true}).exec().then(
+    Post.find({publish: true}).then(
         response => {
             if (response.length) {
-                console.log(response.length)
                 res.status(200).json(response)
             }
             else {
@@ -19,9 +18,8 @@ const getPostController = (req, res) => {
 }
 
 const getPostByIDController = (req, res) => {
-    Post.findOne({id: req.params.id, publish: true}).then(
+    Post.findOne({id: req.params.postID, publish: true}).then(
         response => {
-            console.log(response)
             if (response) {
                 console.log('response')
                 res.status(200).json(response)
