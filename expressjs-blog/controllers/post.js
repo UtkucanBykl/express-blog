@@ -1,5 +1,5 @@
 const {Post} = require('../models/post')
-const {createPost} = require('../services/post')
+const {createPost, updatePost} = require('../services/post')
 
 const getPostController = (req, res) => {
     Post.find({publish: true}).then(
@@ -42,8 +42,17 @@ const createPostController = (req, res) => {
     )
 }
 
+const updatePostController = (req, res) => {
+    updatePost(req.params.postID, req.body).then(
+        response => res.status(201).json(response)
+    ).catch(
+        err => res.status(400).json(err)
+    )
+}
+
 module.exports = {
     getPostController,
     getPostByIDController,
-    createPostController
+    createPostController,
+    updatePostController
 }
