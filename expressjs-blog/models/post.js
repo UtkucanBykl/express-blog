@@ -3,8 +3,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    title: String,
-    content: String,
+    title: {
+        required: [true, 'zorunlu'],
+        type: String
+    },
+    content: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
@@ -16,7 +22,8 @@ const postSchema = new Schema({
     categoryID: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Category'
+            ref: 'Category',
+            required: [true, 'd']
         }
     ],
 })

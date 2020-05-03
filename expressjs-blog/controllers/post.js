@@ -1,4 +1,5 @@
 const {Post} = require('../models/post')
+const {createPost} = require('../services/post')
 
 const getPostController = (req, res) => {
     Post.find({publish: true}).then(
@@ -33,7 +34,16 @@ const getPostByIDController = (req, res) => {
     )
 }
 
+const createPostController = (req, res) => {
+    createPost(req.body).then(
+        response => res.status(201).json(response)
+    ).catch(
+        err => res.status(400).json(err)
+    )
+}
+
 module.exports = {
     getPostController,
     getPostByIDController,
+    createPostController
 }
