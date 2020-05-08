@@ -19,19 +19,7 @@ const getPostController = (req, res) => {
 }
 
 const getPostByIDController = (req, res) => {
-    Post.findOne({id: req.params.postID, publish: true}).then(
-        response => {
-            if (response) {
-                console.log('response')
-                res.status(200).json(response)
-            }
-            else{
-                res.json('Kayit yok')
-            }
-        }
-    ).catch(
-        err => res.status(400).json(err)
-    )
+    res.status(200).json(req.post)
 }
 
 const createPostController = (req, res) => {

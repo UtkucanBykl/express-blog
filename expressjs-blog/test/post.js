@@ -5,6 +5,8 @@ const { describe, it } = require('mocha');
 const app = require('../app')
 const {Post} = require('../models/post')
 
+
+
 describe('Post', () => {
     describe('Post create', () => {
         it('create post', (done) => {
@@ -29,7 +31,6 @@ describe('Post', () => {
             })
             post.save((err, p) => {
                 const url = '/posts/' + p.id
-                console.log(url)
                 request(app).patch(
                     url
                 ).send({'title': 'aa'})
@@ -38,6 +39,14 @@ describe('Post', () => {
                 .end(done)
             })
 
+        })
+    })
+
+    describe('Post create with no auth', () => {
+        it('forbidden', (done) => {
+            request(app).post(
+                '/posts'
+            ).send({'test': '123'}).expect(403).end(done)
         })
     })
 

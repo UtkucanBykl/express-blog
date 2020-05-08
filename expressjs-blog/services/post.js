@@ -20,11 +20,9 @@ const createPost = (data) => {
 const updatePost = (postID, data) => {
     return new Promise((resolve, reject) => {
         Post.findByIdAndUpdate(postID, {...data}, (err, result) => {
-            console.log(err, result)
             if(err){
                 reject(err)
             }else{
-                console.log(result)
                 resolve(result)
             }
         })
