@@ -1,6 +1,7 @@
 const authControl = (req, res, next) => {
     const token = req.header('authorization')
-    if(token == '123'){
+    const token_env = process.env.TOKEN
+    if(token === token_env){
         next()
     }
     else{
